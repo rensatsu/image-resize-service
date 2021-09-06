@@ -1,0 +1,25 @@
+{
+  "name": "image-resize-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "prettier --write '**/*.{ts,js,css,json,md}'",
+    "lint:check": "prettier --check '**/*.{ts,js,css,json,md}'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "convict": "^5.2.1",
+    "dotenv": "^10.0.0",
+    "fastify": "^3.21.0",
+    "fastify-multipart": "^4.0.7",
+    "sharp": "^0.29.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  }
+}
