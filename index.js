@@ -41,6 +41,10 @@ const start = async () => {
     fastify.log.debug(`Hostname: ${host}`);
     fastify.log.debug(`Port: ${port}`);
     fastify.log.debug(`Upload max size: ${config.get("uploadMaxSize")}`);
+    fastify.log.debug(`Thumbnail width: ${config.get("thumbnail.width")}`);
+    fastify.log.debug(`Thumbnail height: ${config.get("thumbnail.height")}`);
+    fastify.log.debug(`Thumbnail quality: ${config.get("thumbnail.quality")}`);
+    fastify.log.debug(`Thumbnail reductionEffort: ${config.get("thumbnail.reductionEffort")}`);
 
     await fastify.listen(port, host);
   } catch (err) {
