@@ -37,6 +37,10 @@ const start = async () => {
     const host = config.get("hostname");
     const port = config.get("port");
 
+    fastify.log.debug(`Hostname: ${host}`);
+    fastify.log.debug(`Port: ${port}`);
+    fastify.log.debug(`Uplaod max size: ${config.get("uploadMaxSize")}`);
+
     await fastify.listen(port, host);
   } catch (err) {
     fastify.log.error(err);
