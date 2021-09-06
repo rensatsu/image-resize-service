@@ -18,14 +18,15 @@ fastify.post("/api/thumbnail", async (req, reply) => {
   fastify.log.debug(`Temp file path: ${files[0].filepath}`);
 
   const thumb = await sharp(files[0].filepath)
-    .resize(500, 450, {
+    .resize(config.get("thumbnail.width"), config.get("thumbnail.height"), {
       fit: sharp.fit.cover,
       position: sharp.gravity.north,
     })
     .webp({
-      quality: 90,
+      quality: config.get("thumbnail.quality"),
       smartSubsample: true,
       force: true,
+      reductionEffort: config.get("thumbnail.reductionEffort"),
     })
     .toBuffer();
 
@@ -39,7 +40,7 @@ const start = async () => {
 
     fastify.log.debug(`Hostname: ${host}`);
     fastify.log.debug(`Port: ${port}`);
-    fastify.log.debug(`Uplaod max size: ${config.get("uploadMaxSize")}`);
+    fastify.log.debug(`Upload max size: ${config.get("uploadMaxSize")}`);
 
     await fastify.listen(port, host);
   } catch (err) {

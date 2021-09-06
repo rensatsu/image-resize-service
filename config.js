@@ -19,7 +19,7 @@ const config = convict({
   port: {
     doc: "The port to bind",
     format: "port",
-    default: 7580,
+    default: 3000,
     env: "HTTP_PORT",
   },
   uploadMaxSize: {
@@ -34,6 +34,12 @@ const config = convict({
       format: Number,
       default: 90,
       env: "THUMB_QUALITY",
+    },
+    reductionEffort: {
+      doc: "Thumbnail reduction effort (0...6, 6 - lowest file size)",
+      format: Number,
+      default: 4,
+      env: "THUMB_REDUCTION",
     },
     width: {
       doc: "Thumbnail width",
