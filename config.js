@@ -3,12 +3,11 @@ const convict = require("convict");
 
 // Config schema
 const config = convict({
-  env: {
-    doc: "The application environment",
-    format: ["production", "development"],
-    default: "development",
-    env: "NODE_ENV",
-    arg: "env",
+  logLevel: {
+    doc: "Logging level",
+    format: ["fatal", "error", "warn", "info", "debug", "trace"],
+    default: "info",
+    env: "LOG_LEVEL",
   },
   hostname: {
     doc: "The hostname or IP address to bind",

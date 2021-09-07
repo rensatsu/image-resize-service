@@ -1,6 +1,6 @@
-const fastify = require("fastify")({ logger: { level: "debug" } });
-const sharp = require("sharp");
 const config = require("./config.js");
+const fastify = require("fastify")({ logger: { level: config.get("logLevel") } });
+const sharp = require("sharp");
 
 fastify.register(require("fastify-multipart"), {
   limits: {
@@ -38,13 +38,7 @@ const start = async () => {
     const host = config.get("hostname");
     const port = config.get("port");
 
-    fastify.log.debug(`Hostname: ${host}`);
-    fastify.log.debug(`Port: ${port}`);
-    fastify.log.debug(`Upload max size: ${config.get("uploadMaxSize")}`);
-    fastify.log.debug(`Thumbnail width: ${config.get("thumbnail.width")}`);
-    fastify.log.debug(`Thumbnail height: ${config.get("thumbnail.height")}`);
-    fastify.log.debug(`Thumbnail quality: ${config.get("thumbnail.quality")}`);
-    fastify.log.debug(`Thumbnail reductionEffort: ${config.get("thumbnail.reductionEffort")}`);
+    fastify.log.debug(`Loaded config ${config}`);
 
     await fastify.listen(port, host);
   } catch (err) {
