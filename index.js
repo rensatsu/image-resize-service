@@ -1,13 +1,17 @@
 const config = require("./config.js");
-const fastify = require("fastify")({ logger: { level: config.get("logLevel") } });
+const fastify = require("fastify")({
+  logger: { level: config.get("logLevel") },
+});
 const sharp = require("sharp");
 
+// Add file uploads handler
 fastify.register(require("fastify-multipart"), {
   limits: {
     fileSize: config.get("uploadMaxSize"),
   },
 });
 
+// Handle thumbnail creation route
 fastify.post("/api/thumbnail", async (req, reply) => {
   const files = await req.saveRequestFiles();
 
@@ -33,7 +37,10 @@ fastify.post("/api/thumbnail", async (req, reply) => {
   reply.code(200).header("content-type", "image/webp").send(thumb);
 });
 
-const start = async () => {
+/**
+ * Start web server.
+ */
+async function start() {
   try {
     const host = config.get("hostname");
     const port = config.get("port");
@@ -45,6 +52,6 @@ const start = async () => {
     fastify.log.error(err);
     process.exit(1);
   }
-};
+}
 
 start();
