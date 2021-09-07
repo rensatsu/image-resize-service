@@ -30,25 +30,25 @@ const config = convict({
   thumbnail: {
     quality: {
       doc: "Thumbnail quality (0...100, higher is better)",
-      format: Number,
+      format: "nat",
       default: 90,
       env: "THUMB_QUALITY",
     },
     reductionEffort: {
       doc: "Thumbnail reduction effort (0...6, 6 - lowest file size)",
-      format: Number,
+      format: "nat",
       default: 4,
       env: "THUMB_REDUCTION",
     },
     width: {
       doc: "Thumbnail width",
-      format: Number,
+      format: "nat",
       default: 640,
       env: "THUMB_WIDTH",
     },
     height: {
       doc: "Thumbnail height",
-      format: Number,
+      format: "nat",
       default: 360,
       env: "THUMB_HEIGHT",
     },
