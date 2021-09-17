@@ -16,7 +16,7 @@
     "convict": "^5.2.1",
     "dotenv": "^10.0.0",
     "fastify": "^3.21.0",
-    "fastify-multipart": "^4.0.7",
+    "fastify-multipart": "^5.0.0",
     "sharp": "^0.29.0"
   },
   "devDependencies": {
