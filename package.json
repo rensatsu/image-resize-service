@@ -13,7 +13,7 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "convict": "^5.2.1",
+    "convict": "^6.2.1",
     "dotenv": "^10.0.0",
     "fastify": "^3.22.0",
     "fastify-multipart": "^5.0.2",
