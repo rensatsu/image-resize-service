@@ -1,5 +1,7 @@
 require("dotenv").config();
 const convict = require("convict");
+const convictFormatWithValidator = require("convict-format-with-validator");
+convict.addFormats(convictFormatWithValidator);
 
 // Config schema
 const config = convict({
@@ -23,7 +25,7 @@ const config = convict({
   },
   uploadMaxSize: {
     doc: "Max size of uploaded files (in bytes)",
-    format: Number,
+    format: "nat",
     default: 10 * 1024 * 1024,
     env: "UPLOAD_MAX_SIZE",
   },
