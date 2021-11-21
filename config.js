@@ -1,7 +1,19 @@
 require("dotenv").config();
+const fs = require("fs-extra");
 const convict = require("convict");
 const convictFormatWithValidator = require("convict-format-with-validator");
 convict.addFormats(convictFormatWithValidator);
+
+convict.addFormat({
+  name: "valid-dir",
+  validate: async function (val, schema) {
+    if (!val || !(typeof val === "string")) {
+      throw new TypeError(`Invalid path (${schema.doc ?? ""})`);
+    }
+
+    await fs.ensureDirSync(val);
+  },
+});
 
 // Config schema
 const config = convict({
@@ -22,6 +34,12 @@ const config = convict({
     format: "port",
     default: 3000,
     env: "HTTP_PORT",
+  },
+  outputDir: {
+    doc: "Directory for resized images",
+    format: "valid-dir",
+    env: "OUTPUT_DIR",
+    default: null,
   },
   uploadMaxSize: {
     doc: "Max size of uploaded files (in bytes)",
