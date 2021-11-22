@@ -1,6 +1,8 @@
 import config from "../../config.js";
 import { default as fetch, Headers } from "node-fetch";
+import { FastifySchema, FastifyInstance } from "fastify";
 
+/** @type {FastifySchema} Proxy Validation Schema */
 const proxySchema = {
   query: {
     type: "object",
@@ -42,6 +44,11 @@ async function downloadFile(url, referer = null) {
   return await fetch(url, request);
 }
 
+/**
+ * Register routes.
+ *
+ * @param {FastifyInstance} fastify Fastify Instance
+ */
 async function routes(fastify) {
   fastify.get("/api/proxy", { schema: proxySchema }, async (req, reply) => {
     const { url, referer } = req.query;
