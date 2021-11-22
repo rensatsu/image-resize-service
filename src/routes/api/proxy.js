@@ -1,8 +1,7 @@
 import config from "../../config.js";
 import { default as fetch, Headers } from "node-fetch";
-import { FastifySchema, FastifyInstance } from "fastify";
 
-/** @type {FastifySchema} Proxy Validation Schema */
+/** @type {import("fastify").FastifySchema} Proxy Validation Schema */
 const proxySchema = {
   query: {
     type: "object",
@@ -47,7 +46,7 @@ async function downloadFile(url, referer = null) {
 /**
  * Register routes.
  *
- * @param {FastifyInstance} fastify Fastify Instance
+ * @param {import("fastify").FastifyInstance} fastify Fastify Instance
  */
 async function routes(fastify) {
   fastify.get("/api/proxy", { schema: proxySchema }, async (req, reply) => {
@@ -55,7 +54,7 @@ async function routes(fastify) {
     const response = await downloadFile(url, referer);
 
     if (!response.ok) {
-      throw new Error("Unable to download an image");
+      return reply.badRequest("Unable to download an image");
     }
 
     const type = response.headers.get("content-type");

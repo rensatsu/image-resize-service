@@ -4,12 +4,17 @@ import crypto from "crypto";
 import path from "path";
 import fs from "fs-extra";
 
+/**
+ * Register routes.
+ *
+ * @param {import("fastify").FastifyInstance} fastify Fastify Instance
+ */
 async function routes(fastify) {
   fastify.post("/api/thumbnail", async (req, reply) => {
     const files = await req.saveRequestFiles();
 
     if (files.length !== 1) {
-      throw { message: "There should be 1 image", statusCode: 400 };
+      return reply.badRequest("There should be 1 image");
     }
 
     fastify.log.debug(`Temp file path: ${files[0].filepath}`);

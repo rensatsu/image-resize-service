@@ -1,25 +1,29 @@
 import config from "./config.js";
 import Fastify from "fastify";
-import fastifyCors from "fastify-cors";
-import fastifyMultipart from "fastify-multipart";
 
 const fastify = Fastify({
   logger: { level: config.get("logLevel") },
 });
 
+// Add sensible defaults
+fastify.register(await import("fastify-sensible"));
+
 // Add CORS handler
-fastify.register(fastifyCors, {
+fastify.register(await import("fastify-cors"), {
   origin: "*",
   allowedHeaders: ["Authorization"],
   maxAge: 86400,
 });
 
 // Add file uploads handler
-fastify.register(fastifyMultipart, {
+fastify.register(await import("fastify-multipart"), {
   limits: {
     fileSize: config.get("uploadMaxSize"),
   },
 });
+
+// Handle root route
+fastify.register(await import("./routes/index.js"));
 
 // Handle thumbnail creation route
 fastify.register(await import("./routes/api/thumbnail.js"));
