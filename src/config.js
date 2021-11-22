@@ -1,7 +1,13 @@
-require("dotenv").config();
-const fs = require("fs-extra");
-const convict = require("convict");
-const convictFormatWithValidator = require("convict-format-with-validator");
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs-extra";
+import convict from "convict";
+import convictFormatWithValidator from "convict-format-with-validator";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
 convict.addFormats(convictFormatWithValidator);
 
 convict.addFormat({
@@ -41,6 +47,12 @@ const config = convict({
     env: "OUTPUT_DIR",
     default: null,
   },
+  userAgent: {
+    doc: "User-Agent header for downloading files",
+    format: String,
+    env: "USER_AGENT",
+    default: null,
+  },
   uploadMaxSize: {
     doc: "Max size of uploaded files (in bytes)",
     format: "nat",
@@ -78,4 +90,4 @@ const config = convict({
 // Perform validation
 config.validate({ allowed: "strict" });
 
-module.exports = config;
+export default config;

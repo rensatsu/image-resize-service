@@ -4,20 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "lint": "prettier --write '**/*.{ts,js,css,json,md}'",
     "lint:check": "prettier --check '**/*.{ts,js,css,json,md}'"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
+  "type": "module",
   "dependencies": {
     "convict": "^6.2.1",
     "convict-format-with-validator": "^6.2.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.24.0",
+    "fastify-cors": "^6.0.2",
     "fastify-multipart": "^5.1.0",
     "fs-extra": "^10.0.0",
+    "node-fetch": "^3.1.0",
     "sharp": "^0.29.3"
   },
   "devDependencies": {
