@@ -15,6 +15,8 @@ Uses [`sharp`][npm-sharp] under the hood.
 
 Use pm2, systemd or any other method to run as a service.
 
+### systemd
+
 Create a new systemd unit in `/etc/systemd/system/image-resize-service.service`:
 
 ```ini
